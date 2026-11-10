@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تماس با ما و مشاوره ورزشی - دمو سایت</title>
+  <meta name="description" content="مرکز ارتباط مستقیم، مشاوره تغذیه ورزشی و ثبت سفارش آنلاین دمو سایت. پاسخگویی و ارسال سریع به سراسر ایران.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF6B00',
+            'primary-hover': '#F97316',
+            'surface-dark': '#0B0F19',
+            'surface-dark-elevated': '#1A2234'
+          },
+          fontFamily: {
+            persian: ['Vazirmatn', 'sans-serif'],
+            chivo: ['Chivo', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-[#070A11] text-slate-100 font-persian">
+
+  <!-- نوار اعلان بالای سایت -->
+  <div class="bg-gradient-to-r from-orange-600 via-amber-600 to-orange-600 text-white text-xs py-2 px-4 text-center font-bold">
+    <div class="site-container flex items-center justify-between">
+      <div class="hidden sm:flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-white animate-ping"></span>
+        <span>واحد مشاوره تخصصی و ثبت سفارش دمو سایت فعال و پاسخگو می‌باشد</span>
+      </div>
+      <div class="mx-auto sm:mx-0 flex items-center gap-4">
+        <span>تلفن مشاوره:</span>
+        <span class="font-mono">۰۲۱-۸۸۸۸۹۹۹۹</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- هدر چسبان دمو سایت -->
+  <header class="sticky-header">
+    <div class="site-container py-3.5">
+      <div class="flex items-center justify-between gap-4">
+        
+        <div class="flex items-center gap-3">
+          <button id="mobile-menu-toggle" class="lg:hidden p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <a href="index.html" class="flex items-center gap-2.5 group">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-600 to-amber-500 flex items-center justify-center text-white shadow-lg shadow-orange-600/30 font-black text-xl">
+              ⚡
+            </div>
+            <div>
+              <span class="text-xl sm:text-2xl font-black text-white tracking-tight group-hover:text-orange-400 transition-colors">دمو سایت</span>
+              <span class="block text-[10px] text-orange-400 font-bold uppercase">تغذیه و مکمل ورزشی</span>
+            </div>
+          </a>
+        </div>
+
+        <nav class="hidden lg:flex items-center gap-6 text-sm font-bold">
+          <a href="index.html" class="text-slate-300 hover:text-white transition-colors">صفحه اصلی</a>
+          <a href="products.html" class="text-slate-300 hover:text-white transition-colors">محصولات و مکمل‌ها</a>
+          <a href="about.html" class="text-slate-300 hover:text-white transition-colors">درباره دمو سایت</a>
+          <a href="contact.html" class="text-orange-400 border-b-2 border-orange-500 pb-1">تماس با ما و مشاوره</a>
+        </nav>
+
+        <div class="hidden md:block flex-1 max-w-xs relative search-container">
+          <div class="relative">
+            <input type="text" placeholder="جستجوی مکمل در دمو سایت..." class="header-search-input form-input pr-9 py-2 text-xs bg-slate-900/90 border-slate-800 rounded-xl">
+            <svg class="w-4 h-4 text-slate-400 absolute right-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <a href="contact.html" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-bold transition-all">
+            <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            مشاوره ورزشی
+          </a>
+
+          <button type="button" onclick="cartManager.openDrawer()" class="relative p-2.5 rounded-xl bg-orange-600/15 hover:bg-orange-600/25 border border-orange-500/40 text-orange-400 transition-all flex items-center justify-center">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <span class="cart-count-badge hidden absolute -top-1.5 -right-1.5 bg-orange-600 text-white text-[11px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-lg border-2 border-slate-950 font-chivo">0</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <main class="py-12">
+    <div class="site-container space-y-12">
+
+      <!-- هدر بخش تماس -->
+      <div class="text-center max-w-2xl mx-auto space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold">
+          ⚡ پاسخگویی سریع همه روزه
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-black text-white">سامانه هوشمند استعلام، مشاوره و تماس با «دمو سایت»</h1>
+        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+          برای استعلام موجودی، دریافت راهنمایی تخصصی درباره دوره‌های مکملی یا پیگیری سفارش، از فرم زیر استفاده فرمایید یا مستقیماً با کارشناسان دمو سایت تماس حاصل نمایید.
+        </p>
+      </div>
+
+      <!-- ابزار تعاملی: فرم استعلام سریع و ثبت پیش‌سفارش آنلاین -->
+      <section class="rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- فرم انتخاب و مشخصات -->
+          <div class="lg:col-span-7 space-y-5">
+            <div>
+              <h2 class="text-xl font-black text-white flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-orange-500"></span>
+                فرم استعلام و ثبت پیش‌سفارش مکمل
+              </h2>
+              <p class="text-xs text-slate-400 mt-1">مشخصات مورد نظر خود را وارد کنید تا پیش‌فاکتور سفارش برای شما محاسبه و آماده شود.</p>
+            </div>
+
+            <form id="order-inquiry-form" class="space-y-4" onsubmit="event.preventDefault(); submitInquiryOrder();">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1">نام و نام خانوادگی:</label>
+                  <input type="text" id="tb-name" value="علیرضا رضایی" required class="form-input text-xs py-2.5">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1">شماره تماس همراه:</label>
+                  <input type="tel" id="tb-phone" value="۰۹۱۲۳۴۵۶۷۸۹" required class="form-input text-xs py-2.5 font-mono text-left">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1">انتخاب مکمل از دمو سایت:</label>
+                  <select id="tb-product" class="form-input text-xs py-2.5 bg-slate-950" onchange="updateInquiryPreview()">
+                    <!-- با جاوااسکریپت پر می‌شود -->
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1">تعداد درخواستی:</label>
+                  <input type="number" id="tb-qty" value="1" min="1" max="10" class="form-input text-xs py-2.5 font-chivo" onchange="updateInquiryPreview()">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1">طعم دلخواه:</label>
+                  <input type="text" id="tb-flavor" value="شکلاتی دوبل" class="form-input text-xs py-2.5" oninput="updateInquiryPreview()">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1">استان و شهر مقصد:</label>
+                  <input type="text" id="tb-city" value="تهران" class="form-input text-xs py-2.5" oninput="updateInquiryPreview()">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">توضیحات یا سوال ورزشی:</label>
+                <textarea id="tb-notes" rows="2" placeholder="مثال: هدف من افزایش حجم بدون چربی است؛ آیا این مکمل مناسب است؟" class="form-input text-xs py-2" oninput="updateInquiryPreview()"></textarea>
+              </div>
+
+              <div class="flex flex-wrap gap-3 pt-2">
+                <button type="submit" class="btn-primary py-3 px-6 text-xs flex-1 justify-center shadow-lg shadow-orange-600/20">
+                  ثبت پیش‌سفارش و دریافت کد پیگیری
+                </button>
+                <button type="button" onclick="addInquiryToCart()" class="btn-secondary py-3 px-4 text-xs">
+                  افزودن مستقیم به سبد خرید
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- پیش‌نمایش زنده فاکتور و وضعیت استعلام -->
+          <div class="lg:col-span-5 bg-slate-950 border border-slate-800 rounded-2xl p-5 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <span class="text-xs font-bold text-orange-400 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                پیش‌نمایش پیش‌فاکتور دمو سایت:
+              </span>
+              <span class="text-[10px] text-slate-500 font-mono">پیش‌نمایش زنده</span>
+            </div>
+
+            <!-- جعبه نمایش پیش‌فاکتور -->
+            <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-slate-100 text-xs font-mono whitespace-pre-line leading-relaxed shadow-inner max-h-[360px] overflow-y-auto" id="inquiry-preview-box">
+              در حال محاسبه...
+            </div>
+
+            <div class="text-[11px] text-slate-400 flex items-center gap-2">
+              <span class="text-emerald-400">✓</span> پس از ثبت، کارشناسان دمو سایت مشخصات و موجودی را بررسی و تایید خواهند کرد.
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- اطلاعات تماس و راه‌های ارتباطی دیگر -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center text-xl">
+            📞
+          </div>
+          <h3 class="text-base font-bold text-white">پشتیبانی و سفارش تلفنی</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            پاسخگویی سریع خطوط مستقیم جهت مشاوره و پیگیری سفارشات دمو سایت.
+          </p>
+          <div class="pt-2">
+            <a href="tel:02188889999" class="text-orange-400 hover:underline font-mono text-xs font-bold block">
+              ۰۲۱-۸۸۸۸۹۹۹۹
+            </a>
+            <span class="text-[10px] text-slate-500 block mt-1">همه روزه از ساعت ۹ الی ۲۳</span>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl">
+            📱
+          </div>
+          <h3 class="text-base font-bold text-white">واتس‌اپ و مشاوره برخط</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            مشاوره تخصصی با کارشناسان ارشد تغذیه ورزشی جهت انتخاب پکیج مناسب.
+          </p>
+          <div class="pt-2">
+            <a href="https://wa.me/989123456789" target="_blank" class="text-emerald-400 hover:underline font-mono text-xs font-bold block">
+              ۰۹۱۲-۳۴۵-۶۷۸۹
+            </a>
+            <span class="text-[10px] text-slate-500 block mt-1">پاسخگویی سریع واتس‌اپ</span>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl">
+            🏢
+          </div>
+          <h3 class="text-base font-bold text-white">دفتر مرکزی و انبار دمو سایت</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            تهران، خیابان شریعتی، مجتمع ورزشی پارس، واحد ۳۴ (تحویل حضوری با هماهنگی قبلی)
+          </p>
+          <div class="pt-2">
+            <span class="text-sky-400 text-xs font-bold block">کد پستی انبار: ۱۹۱۸۷۶۵۴۳۲</span>
+            <span class="text-[10px] text-slate-500 block mt-1">ارسال روزانه به سراسر کشور</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- سوالات متداول (FAQ) -->
+      <section class="space-y-4 max-w-3xl mx-auto pt-6">
+        <div class="text-center mb-6">
+          <h2 class="text-2xl font-black text-white">سوالات متداول مشتریان دمو سایت</h2>
+          <p class="text-xs text-slate-400 mt-1">پاسخ به پرتکرارترین پرسش‌های ورزشکاران</p>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          <details class="group p-4 rounded-xl bg-slate-900 border border-slate-800" open>
+            <summary class="font-bold text-white cursor-pointer flex items-center justify-between">
+              <span>چگونه می‌توانم سفارش خود را در دمو سایت ثبت کنم؟</span>
+              <span class="text-orange-400 group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+            <p class="text-slate-400 mt-3 leading-relaxed">
+              شما می‌توانید به راحتی هر مکملی را با طعم و وزن دلخواه به سبد خرید اضافه کنید و سپس از طریق دکمه «تکمیل خرید و ثبت مشخصات» وارد صفحه تسویه حساب شوید و پس از وارد کردن آدرس پستی، سفارش خود را نهایی فرمایید.
+            </p>
+          </details>
+
+          <details class="group p-4 rounded-xl bg-slate-900 border border-slate-800">
+            <summary class="font-bold text-white cursor-pointer flex items-center justify-between">
+              <span>چگونه از اصالت مکمل‌های دمو سایت مطمئن شوم؟</span>
+              <span class="text-orange-400 group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+            <p class="text-slate-400 mt-3 leading-relaxed">
+              تمامی محصولات دمو سایت دارای بارکد اسکن مستقیم سایت کمپانی سازنده، بچ‌نامبر و تاریخ انقضای معتبر هستند و با تضمین بازگشت وجه ۱۰۰٪ بی‌قید و شرط ارسال می‌شوند.
+            </p>
+          </details>
+
+          <details class="group p-4 rounded-xl bg-slate-900 border border-slate-800">
+            <summary class="font-bold text-white cursor-pointer flex items-center justify-between">
+              <span>هزینه و زمان ارسال سفارشات به چه صورت است؟</span>
+              <span class="text-orange-400 group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+            <p class="text-slate-400 mt-3 leading-relaxed">
+              سفارش‌های بالای ۱,۵۰۰,۰۰۰ تومان در دمو سایت به صورت کاملاً رایگان ارسال می‌شوند. ارسال در تهران ظرف چند ساعت با پیک موتوری و در شهرستان‌ها بین ۲۴ تا ۴۸ ساعت با پست پیشتاز یا تیپاکس انجام می‌شود.
+            </p>
+          </details>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- فوتر اصلی دمو سایت -->
+  <footer class="bg-[#0B0F19] border-t border-slate-800/80 pt-10 pb-8 text-slate-400 text-xs mt-12">
+    <div class="site-container">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center text-white font-black">⚡</div>
+          <span class="text-lg font-black text-white">دمو سایت</span>
+          <span class="text-[11px] text-slate-500">| فروشگاه تخصصی مکمل‌های ورزشی</span>
+        </div>
+        <div class="flex items-center gap-4 text-xs">
+          <a href="index.html" class="hover:text-white">صفحه اصلی</a>
+          <a href="products.html" class="hover:text-white">محصولات</a>
+          <a href="about.html" class="hover:text-white">درباره ما</a>
+          <a href="contact.html" class="text-orange-400 font-bold">تماس با ما و مشاوره</a>
+        </div>
+      </div>
+      <div class="text-center text-slate-500 text-[11px]">
+        © تمامی حقوق برای «دمو سایت» محفوظ است. استقرار مستقیم بدون نیاز به کامپایل در GitHub Pages.
+      </div>
+    </div>
+  </footer>
+
+  <!-- دراور سبد خرید و منوی موبایل -->
+  <div id="cart-drawer-overlay" class="hidden opacity-0" onclick="cartManager.closeDrawer()"></div>
+  <aside id="cart-drawer" class="translate-x-full opacity-0 pointer-events-none">
+    <div class="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+        <h3 class="text-sm font-bold text-white">سبد خرید «دمو سایت»</h3>
+      </div>
+      <button type="button" onclick="cartManager.closeDrawer()" class="text-slate-400 hover:text-white p-1">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div id="cart-drawer-items" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
+    <div id="cart-drawer-footer" class="p-4 border-t border-slate-800 bg-slate-950/90 space-y-3">
+      <form id="drawer-coupon-form" class="flex gap-2">
+        <input type="text" id="drawer-coupon-input" placeholder="کد تخفیف (مثال: DEMO20)" class="form-input py-1.5 px-3 text-xs flex-1 uppercase">
+        <button type="submit" class="btn-secondary py-1.5 px-3 text-xs whitespace-nowrap">اعمال کد</button>
+      </form>
+      <div class="space-y-1.5 text-xs text-slate-300 pt-1">
+        <div class="flex justify-between"><span class="text-slate-400">جمع کل کالاها:</span><span id="drawer-subtotal" class="font-bold text-white font-chivo">۰ تومان</span></div>
+        <div id="drawer-discount-row" class="flex justify-between text-emerald-400 hidden"><span>تخفیف ویژه کوپن:</span><span id="drawer-discount" class="font-bold font-chivo">۰ تومان</span></div>
+        <div class="flex justify-between"><span class="text-slate-400">هزینه ارسال:</span><span id="drawer-shipping" class="font-bold font-chivo">رایگان</span></div>
+        <div class="flex justify-between pt-2 border-t border-slate-800 text-sm font-black text-white"><span>مبلغ قابل پرداخت:</span><span id="drawer-total" class="text-orange-400 font-chivo">۰ تومان</span></div>
+      </div>
+      <div class="space-y-2 pt-1">
+        <a href="checkout.html" class="w-full btn-primary py-2.5 text-xs justify-center">تکمیل خرید و ثبت مشخصات</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- منوی موبایل -->
+  <div id="mobile-menu-overlay" class="hidden opacity-0 fixed inset-0 bg-black/80 z-55"></div>
+  <aside id="mobile-menu-drawer" class="translate-x-full opacity-0 pointer-events-none p-5">
+    <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+      <span class="text-base font-black text-white">دمو سایت</span>
+      <button id="mobile-menu-close" class="text-slate-400 hover:text-white p-1">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav class="space-y-3 font-bold text-sm my-4">
+      <a href="index.html" class="block p-2 rounded-lg text-slate-300 hover:bg-slate-800">صفحه اصلی</a>
+      <a href="products.html" class="block p-2 rounded-lg text-slate-300 hover:bg-slate-800">محصولات و مکمل‌ها</a>
+      <a href="about.html" class="block p-2 rounded-lg text-slate-300 hover:bg-slate-800">درباره دمو سایت</a>
+      <a href="contact.html" class="block p-2 rounded-lg bg-orange-600/10 text-orange-400">تماس با ما و مشاوره</a>
+      <a href="checkout.html" class="block p-2 rounded-lg text-slate-300 hover:bg-slate-800">تسویه حساب دمو</a>
+    </nav>
+    <div class="mt-auto pt-6 border-t border-slate-800 space-y-2">
+      <button type="button" onclick="cartManager.openDrawer()" class="w-full btn-primary py-2.5 text-xs text-center justify-center">مشاهده سبد خرید</button>
+    </div>
+  </aside>
+
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // راه‌اندازی منوی محصولات و پیش‌نمایش استعلام
+    document.addEventListener('DOMContentLoaded', () => {
+      const select = document.getElementById('tb-product');
+      if (select && typeof PRODUCTS !== 'undefined') {
+        PRODUCTS.forEach(p => {
+          const opt = document.createElement('option');
+          opt.value = p.id;
+          opt.textContent = `${p.name} - ${formatPrice(p.price)} تومان`;
+          select.appendChild(opt);
+        });
+      }
+      updateInquiryPreview();
+    });
+
+    function getFormValues() {
+      const name = document.getElementById('tb-name').value || 'مشتری گرامی';
+      const phone = document.getElementById('tb-phone').value || '۰۹xxxxxxxxx';
+      const prodId = document.getElementById('tb-product').value;
+      const qty = parseInt(document.getElementById('tb-qty').value) || 1;
+      const flavor = document.getElementById('tb-flavor').value || 'طبیعی';
+      const city = document.getElementById('tb-city').value || 'تهران';
+      const notes = document.getElementById('tb-notes').value || '';
+
+      const product = (typeof PRODUCTS !== 'undefined' && PRODUCTS.find(p => p.id === prodId)) || (PRODUCTS && PRODUCTS[0]);
+      return { name, phone, product, qty, flavor, city, notes };
+    }
+
+    function buildInquiryString() {
+      const vals = getFormValues();
+      const p = vals.product;
+      const total = p ? p.price * vals.qty : 0;
+      const now = new Date().toLocaleDateString('fa-IR');
+
+      let text = `⚡ پیش‌فاکتور استعلام آنلاین «دمو سایت» ⚡\n`;
+      text += `📅 تاریخ: ${now}\n`;
+      text += `━━━━━━━━━━━━━━━━━━━━━\n`;
+      text += `👤 متقاضی: ${vals.name}\n`;
+      text += `📱 شماره تماس: ${vals.phone}\n`;
+      text += `📍 شهر مقصد: ${vals.city}\n`;
+      text += `━━━━━━━━━━━━━━━━━━━━━\n`;
+      text += `🏋️ محصول انتخابی: ${p ? p.name : 'مکمل ورزشی'}\n`;
+      text += `🏢 برند: ${p ? p.brand : 'اورجینال'}\n`;
+      text += `🍓 طعم: ${vals.flavor}\n`;
+      text += `🔢 تعداد: ${vals.qty} عدد\n`;
+      text += `💰 قیمت واحد: ${formatPrice(p ? p.price : 0)} تومان\n`;
+      text += `💳 جمع کل فاکتور: ${formatPrice(total)} تومان\n`;
+      if (vals.notes) {
+        text += `📝 توضیحات: ${vals.notes}\n`;
+      }
+      text += `━━━━━━━━━━━━━━━━━━━━━\n`;
+      text += `وضعیت: آماده ثبت در سبد خرید یا بررسی توسط تیم فروش`;
+
+      return text;
+    }
+
+    function updateInquiryPreview() {
+      const preview = document.getElementById('inquiry-preview-box');
+      if (preview) {
+        preview.textContent = buildInquiryString();
+      }
+    }
+
+    function submitInquiryOrder() {
+      const vals = getFormValues();
+      const randomCode = 'INQ-' + Math.floor(10000 + Math.random() * 90000);
+      cartManager.showToast(`درخواست شما با کد پیگیری ${randomCode} ثبت شد. کارشناسان دمو سایت به زودی تماس خواهند گرفت.`, 'success');
+    }
+
+    function addInquiryToCart() {
+      const vals = getFormValues();
+      if (vals.product) {
+        cartManager.addItem(vals.product, vals.product.weights[0], vals.flavor, vals.qty);
+      }
+    }
+  </script>
+</body>
+</html>

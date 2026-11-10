@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسویه حساب و تکمیل سفارش - دمو سایت</title>
+  <meta name="description" content="صفحه تسویه حساب آنلاین و ثبت سفارش مکمل‌های ورزشی دمو سایت با صدور فاکتور و کد رهگیری اختصاصی.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF6B00',
+            'primary-hover': '#F97316',
+            'surface-dark': '#0B0F19',
+            'surface-dark-elevated': '#1A2234'
+          },
+          fontFamily: {
+            persian: ['Vazirmatn', 'sans-serif'],
+            chivo: ['Chivo', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-[#070A11] text-slate-100 font-persian">
+
+  <!-- هدر چسبان دمو سایت -->
+  <header class="sticky-header">
+    <div class="site-container py-3.5">
+      <div class="flex items-center justify-between gap-4">
+        
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="flex items-center gap-2.5 group">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-600 to-amber-500 flex items-center justify-center text-white shadow-lg shadow-orange-600/30 font-black text-xl">
+              ⚡
+            </div>
+            <div>
+              <span class="text-xl sm:text-2xl font-black text-white tracking-tight group-hover:text-orange-400 transition-colors">دمو سایت</span>
+              <span class="block text-[10px] text-orange-400 font-bold uppercase">درگاه امن ثبت سفارش</span>
+            </div>
+          </a>
+        </div>
+
+        <nav class="hidden sm:flex items-center gap-6 text-sm font-bold">
+          <a href="index.html" class="text-slate-300 hover:text-white transition-colors">صفحه اصلی</a>
+          <a href="products.html" class="text-slate-300 hover:text-white transition-colors">مکمل‌ها</a>
+          <a href="contact.html" class="text-slate-300 hover:text-white transition-colors">تماس و پشتیبانی</a>
+        </nav>
+
+        <div class="flex items-center gap-2.5">
+          <button type="button" onclick="cartManager.openDrawer()" class="relative p-2.5 rounded-xl bg-orange-600/15 hover:bg-orange-600/25 border border-orange-500/40 text-orange-400 transition-all flex items-center justify-center">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <span class="cart-count-badge hidden absolute -top-1.5 -right-1.5 bg-orange-600 text-white text-[11px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-lg border-2 border-slate-950 font-chivo">0</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <main class="py-10">
+    <div class="site-container">
+      
+      <!-- عنوان صفحه -->
+      <div class="mb-8 border-b border-slate-800 pb-5">
+        <nav class="flex items-center gap-2 text-xs text-slate-400 mb-1">
+          <a href="index.html" class="hover:text-white">صفحه اصلی</a>
+          <span>/</span>
+          <a href="products.html" class="hover:text-white">مکمل‌ها</a>
+          <span>/</span>
+          <span class="text-orange-400">تکمیل سفارش و تسویه حساب</span>
+        </nav>
+        <h1 class="text-2xl sm:text-3xl font-black text-white">تسویه حساب و ثبت نهایی سفارش در «دمو سایت»</h1>
+      </div>
+
+      <!-- ساختار ۲ ستونه: فرم اطلاعات خریدار + خلاصه فاکتور -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- ستون فرم اطلاعات ارسال (۸ ستون) -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <form id="checkout-form" onsubmit="event.preventDefault(); processCheckout();" class="space-y-6">
+            
+            <!-- بخش ۱: اطلاعات گیرنده -->
+            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+              <h2 class="text-base font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-3">
+                <span class="w-6 h-6 rounded-full bg-orange-600 text-white text-xs font-bold flex items-center justify-center font-chivo">1</span>
+                مشخصات و آدرس تحویل‌گیرنده
+              </h2>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1.5">نام و نام خانوادگی تحویل‌گیرنده: *</label>
+                  <input type="text" id="cust-name" required value="سهراب مرادی" placeholder="مثال: علی رضایی" class="form-input text-xs">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1.5">شماره تلفن همراه (جهت پیامک رهگیری): *</label>
+                  <input type="tel" id="cust-phone" required value="۰۹۱۲۳۴۵۶۷۸۹" placeholder="۰۹xxxxxxxxx" class="form-input text-xs font-mono text-left">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1.5">استان مقصد: *</label>
+                  <input type="text" id="cust-province" required value="تهران" placeholder="مثال: تهران، اصفهان، فارس..." class="form-input text-xs">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1.5">شهر: *</label>
+                  <input type="text" id="cust-city" required value="تهران" placeholder="مثال: تهران، شیراز، تبریز..." class="form-input text-xs">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">آدرس دقیق پستی: *</label>
+                <textarea id="cust-address" required rows="2" placeholder="خیابان، کوچه، پلاک، زنگ، طبقه" class="form-input text-xs">خیابان ولیعصر، نرسیده به میدان ونک، مجتمع نگین، واحد ۱۲</textarea>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1.5">کد پستی ۱۰ رقمی:</label>
+                  <input type="text" id="cust-postal" value="۱۹۱۸۷۶۵۴۳۲" placeholder="۱۰ رقم بدون خط تیره" class="form-input text-xs font-mono text-left">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-300 mb-1.5">یادداشت سفارش (اختیاری):</label>
+                  <input type="text" id="cust-notes" placeholder="مثال: تحویل عصر، یا هماهنگی تلفنی قبل از حرکت" class="form-input text-xs">
+                </div>
+              </div>
+
+            </div>
+
+            <!-- بخش ۲: شیوه ارسال مرسوله -->
+            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+              <h2 class="text-base font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-3">
+                <span class="w-6 h-6 rounded-full bg-orange-600 text-white text-xs font-bold flex items-center justify-center font-chivo">2</span>
+                انتخاب نحوه ارسال مکمل‌ها
+              </h2>
+
+              <div class="space-y-2.5 text-xs">
+                <label class="flex items-center justify-between p-3 rounded-xl border border-orange-500/50 bg-slate-950/80 cursor-pointer">
+                  <div class="flex items-center gap-3">
+                    <input type="radio" name="shipping-method" value="post" checked class="text-orange-500">
+                    <div>
+                      <span class="font-bold text-white block">پست پیشتاز با بسته‌بندی ضدضربه</span>
+                      <span class="text-slate-400 text-[11px]">تحویل ۲۴ تا ۴۸ ساعته با کد رهگیری پستی</span>
+                    </div>
+                  </div>
+                  <span class="text-emerald-400 font-bold font-chivo">رایگان (طرح ویژه دمو سایت)</span>
+                </label>
+
+                <label class="flex items-center justify-between p-3 rounded-xl border border-slate-800 hover:border-slate-700 bg-slate-950/40 cursor-pointer">
+                  <div class="flex items-center gap-3">
+                    <input type="radio" name="shipping-method" value="tipax" class="text-orange-500">
+                    <div>
+                      <span class="font-bold text-white block">تیپاکس اکسپرس (پس‌کرایه)</span>
+                      <span class="text-slate-400 text-[11px]">تحویل سریع درب منزل سراسر کشور</span>
+                    </div>
+                  </div>
+                  <span class="text-slate-400 font-mono text-[11px]">پرداخت کرایه در محل</span>
+                </label>
+
+                <label class="flex items-center justify-between p-3 rounded-xl border border-slate-800 hover:border-slate-700 bg-slate-950/40 cursor-pointer">
+                  <div class="flex items-center gap-3">
+                    <input type="radio" name="shipping-method" value="courier" class="text-orange-500">
+                    <div>
+                      <span class="font-bold text-white block">پیک موتوری فوری (ویژه استان تهران)</span>
+                      <span class="text-slate-400 text-[11px]">تحویل زیر ۳ ساعت در روزهای کاری</span>
+                    </div>
+                  </div>
+                  <span class="text-slate-300 font-chivo font-bold">۹۵,۰۰۰ تومان</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- بخش ۳: روش پرداخت و ثبت نهایی -->
+            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+              <h2 class="text-base font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-3">
+                <span class="w-6 h-6 rounded-full bg-orange-600 text-white text-xs font-bold flex items-center justify-center font-chivo">3</span>
+                شیوه پرداخت سفارش
+              </h2>
+
+              <div class="space-y-3 text-xs">
+                
+                <!-- روش ۱: پرداخت آنلاین شتاب -->
+                <label class="p-4 rounded-xl border-2 border-orange-500/60 bg-orange-950/20 block cursor-pointer">
+                  <div class="flex items-start gap-3">
+                    <input type="radio" name="payment-method" value="online-gateway" checked class="mt-1 text-orange-500">
+                    <div class="flex-1">
+                      <div class="flex items-center justify-between">
+                        <span class="font-black text-white text-sm">درگاه پرداخت اینترنتی آنلاین شتاب (شاپرک - شبیه‌سازی)</span>
+                        <span class="text-emerald-400 font-bold text-[10px]">اتصال امن شتاب</span>
+                      </div>
+                      <p class="text-slate-300 mt-1 leading-relaxed">
+                        پرداخت امن و آنی با تمامی کارت‌های بانکی عضو شتاب به همراه صدور فاکتور رسمی و کد رهگیری فوری.
+                      </p>
+                    </div>
+                  </div>
+                </label>
+
+                <!-- روش ۲: پرداخت در محل -->
+                <label class="p-4 rounded-xl border border-slate-800 bg-slate-950/60 block cursor-pointer">
+                  <div class="flex items-start gap-3">
+                    <input type="radio" name="payment-method" value="cod" class="mt-1 text-orange-500">
+                    <div class="flex-1">
+                      <div class="flex items-center justify-between">
+                        <span class="font-bold text-white text-sm">پرداخت در محل با کارتخوان سیار</span>
+                        <span class="text-slate-400 text-[10px]">تهران و البرز</span>
+                      </div>
+                      <p class="text-slate-400 mt-1 leading-relaxed">
+                        تسویه فاکتور هنگام دریافت بسته با کارت‌های بانکی عضو شتاب درب منزل.
+                      </p>
+                    </div>
+                  </div>
+                </label>
+
+                <!-- روش ۳: کارت به کارت -->
+                <label class="p-4 rounded-xl border border-slate-800 bg-slate-950/60 block cursor-pointer">
+                  <div class="flex items-start gap-3">
+                    <input type="radio" name="payment-method" value="card-to-card" class="mt-1 text-orange-500">
+                    <div class="flex-1">
+                      <div class="flex items-center justify-between">
+                        <span class="font-bold text-white text-sm">کارت به کارت به شماره حساب رسمی</span>
+                      </div>
+                      <p class="text-slate-400 mt-1 leading-relaxed">
+                        واریز به شماره حساب رسمی فروشگاه دمو سایت و ثبت شماره پیگیری واریز.
+                      </p>
+                    </div>
+                  </div>
+                </label>
+
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <button type="submit" class="w-full btn-primary py-4 px-6 text-sm justify-center shadow-xl shadow-orange-600/25">
+                تایید نهایی و ثبت سفارش در دمو سایت
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+        <!-- ستون خلاصه سفارش و اقلام سبد خرید (۵ ستون) -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-5 sticky top-24">
+            
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h2 class="text-base font-bold text-white flex items-center gap-2">
+                <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                خلاصه سفارش و اقلام سبد
+              </h2>
+              <span id="checkout-items-badge" class="text-xs bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full font-chivo">۰ قلم</span>
+            </div>
+
+            <!-- لیست اقلام سبد -->
+            <div id="checkout-cart-items" class="space-y-3 max-h-72 overflow-y-auto pr-1">
+              <!-- با جاوااسکریپت پر می‌شود -->
+            </div>
+
+            <!-- فیلد کوپن تخفیف در صفحه تسویه -->
+            <div class="pt-3 border-t border-slate-800">
+              <form id="checkout-coupon-form" class="flex gap-2" onsubmit="event.preventDefault(); applyCheckoutCoupon();">
+                <input type="text" id="checkout-coupon-input" placeholder="کد تخفیف (DEMO20)" class="form-input text-xs py-2 flex-1 uppercase">
+                <button type="submit" class="btn-secondary text-xs py-2 px-3 whitespace-nowrap">اعمال</button>
+              </form>
+            </div>
+
+            <!-- جدول نهایی مبالغ -->
+            <div class="space-y-2 pt-3 border-t border-slate-800 text-xs">
+              <div class="flex justify-between text-slate-400">
+                <span>جمع اقلام سبد:</span>
+                <span id="co-subtotal" class="font-bold text-white font-chivo">۰ تومان</span>
+              </div>
+              
+              <div id="co-discount-row" class="flex justify-between text-emerald-400 hidden">
+                <span>تخفیف ویژه کوپن:</span>
+                <span id="co-discount" class="font-bold font-chivo">۰ تومان</span>
+              </div>
+
+              <div class="flex justify-between text-slate-400">
+                <span>هزینه بسته‌بندی و ارسال:</span>
+                <span id="co-shipping" class="font-bold font-chivo text-emerald-400">رایگان</span>
+              </div>
+
+              <div class="flex justify-between pt-3 border-t border-slate-800 text-base font-black text-white">
+                <span>مبلغ نهایی قابل پرداخت:</span>
+                <span id="co-total" class="text-orange-400 font-chivo">۰ تومان</span>
+              </div>
+            </div>
+
+            <!-- نشان‌های اطمینان -->
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 text-[11px] text-slate-400 space-y-1.5">
+              <div class="flex items-center gap-1.5 text-emerald-400">
+                <span>✓</span> ضمانت اصالت ۱۰۰٪ فیزیکی و آزمایشگاهی در دمو سایت
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span>⚡</span> بسته‌بندی ویژه و ضدضربه برای تمامی مکمل‌ها
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- مودال موفقیت و صدور فاکتور دمو سایت -->
+  <div id="order-success-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-lg p-6 sm:p-8 shadow-2xl relative text-center space-y-5">
+      
+      <div class="w-16 h-16 mx-auto rounded-full bg-emerald-500/10 border-2 border-emerald-500/30 flex items-center justify-center text-emerald-400 text-3xl animate-bounce">
+        ✓
+      </div>
+
+      <div>
+        <span class="text-xs font-bold text-orange-400 block mb-1">دمو سایت - ثبت موفق سفارش</span>
+        <h3 class="text-xl font-black text-white">سفارش شما با موفقیت ثبت گردید!</h3>
+        <p class="text-xs text-slate-300 mt-2">پیش‌فاکتور شما صادر شده و کارشناسان پشتیبانی دمو سایت آماده ارسال مرسوله می‌باشند.</p>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 text-right space-y-2 text-xs">
+        <div class="flex justify-between border-b border-slate-800 pb-2">
+          <span class="text-slate-400">شماره رهگیری سفارش:</span>
+          <span id="res-tracking-code" class="font-bold text-orange-400 font-chivo font-mono text-sm">DEMO-IR-89421</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">تحویل‌گیرنده:</span>
+          <span id="res-name" class="font-bold text-white">سهراب مرادی</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">شماره تماس:</span>
+          <span id="res-phone" class="font-bold text-white font-mono">۰۹۱۲۳۴۵۶۷۸۹</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">مبلغ فاکتور:</span>
+          <span id="res-amount" class="font-black text-emerald-400 font-chivo">۰ تومان</span>
+        </div>
+      </div>
+
+      <div class="space-y-2 pt-2">
+        <button type="button" onclick="window.print()" class="w-full btn-primary py-3 text-xs justify-center shadow-lg">
+          چاپ و دریافت پیش‌فاکتور رسمی
+        </button>
+        <a href="index.html" class="w-full btn-secondary py-3 text-xs justify-center block text-center">
+          بازگشت به صفحه اصلی دمو سایت
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- فوتر اصلی دمو سایت -->
+  <footer class="bg-[#0B0F19] border-t border-slate-800/80 pt-10 pb-8 text-slate-400 text-xs mt-12">
+    <div class="site-container text-center text-slate-500 text-[11px]">
+      © تمامی حقوق برای «دمو سایت» محفوظ است. سیستم فروشگاهی بدون نیاز به سرور و بیلد آماده برای GitHub Pages.
+    </div>
+  </footer>
+
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    let currentLastOrder = null;
+
+    // بارگذاری و هماهنگی سبد در صفحه تسویه
+    function renderCheckoutPage() {
+      const itemsContainer = document.getElementById('checkout-cart-items');
+      const badgeEl = document.getElementById('checkout-items-badge');
+      if (!itemsContainer) return;
+
+      const cart = cartManager.cart;
+      const totals = cartManager.getTotals();
+
+      if (badgeEl) badgeEl.textContent = `${totals.totalItems} قلم`;
+
+      if (cart.length === 0) {
+        if (typeof PRODUCTS !== 'undefined' && PRODUCTS.length >= 2) {
+          cartManager.addItem(PRODUCTS[0], '۲.۲۷ کیلوگرم (۵ پوند)', 'دابل ریچ چاکلت', 1);
+          cartManager.addItem(PRODUCTS[2], '۳۰۰ گرم', 'بدون طعم (طبیعی)', 1);
+          return;
+        }
+      }
+
+      let html = '';
+      cart.forEach(item => {
+        const itemImg = item.image || (getProductById(item.id) && getProductById(item.id).image) || 'assets/images/whey-gold.jpg';
+        html += `
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800/80">
+            <div class="w-12 h-12 rounded-lg overflow-hidden border border-slate-800 flex-shrink-0 bg-slate-900">
+              <img src="${itemImg}" alt="${item.name}" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-1 min-w-0">
+              <h4 class="text-xs font-bold text-white truncate">${item.name}</h4>
+              <div class="text-[10px] text-slate-400 mt-0.5">${item.weight} • طعم: ${item.flavor}</div>
+              <div class="text-[11px] text-orange-400 font-bold font-chivo mt-1">تعداد: ${item.quantity} عدد (${formatPrice(item.price * item.quantity)} تومان)</div>
+            </div>
+          </div>
+        `;
+      });
+      itemsContainer.innerHTML = html;
+
+      // آپدیت ارقام فاکتور
+      const subEl = document.getElementById('co-subtotal');
+      const discEl = document.getElementById('co-discount');
+      const discRow = document.getElementById('co-discount-row');
+      const shipEl = document.getElementById('co-shipping');
+      const totEl = document.getElementById('co-total');
+
+      if (subEl) subEl.textContent = `${formatPrice(totals.subtotal)} تومان`;
+      if (shipEl) {
+        shipEl.textContent = totals.isFreeShipping ? 'رایگان (سفارش بالای ۱.۵ میلیون)' : `${formatPrice(totals.shippingFee)} تومان`;
+      }
+
+      if (discRow) {
+        if (totals.discountAmount > 0) {
+          discRow.classList.remove('hidden');
+          if (discEl) discEl.textContent = `-${formatPrice(totals.discountAmount)} تومان`;
+        } else {
+          discRow.classList.add('hidden');
+        }
+      }
+
+      if (totEl) totEl.textContent = `${formatPrice(totals.total)} تومان`;
+    }
+
+    function applyCheckoutCoupon() {
+      const input = document.getElementById('checkout-coupon-input');
+      if (!input) return;
+      const res = cartManager.applyCoupon(input.value);
+      if (res.success) {
+        cartManager.showToast(res.message, 'success');
+        input.value = '';
+        renderCheckoutPage();
+      } else {
+        cartManager.showToast(res.message, 'error');
+      }
+    }
+
+    function getCustomerData() {
+      return {
+        name: document.getElementById('cust-name').value,
+        phone: document.getElementById('cust-phone').value,
+        province: document.getElementById('cust-province').value,
+        city: document.getElementById('cust-city').value,
+        address: document.getElementById('cust-address').value,
+        postalCode: document.getElementById('cust-postal').value,
+        notes: document.getElementById('cust-notes').value,
+        shipping: document.querySelector('input[name="shipping-method"]:checked').value,
+        payment: document.querySelector('input[name="payment-method"]:checked').value
+      };
+    }
+
+    function processCheckout() {
+      const customer = getCustomerData();
+      const totals = cartManager.getTotals();
+      showSuccessModal(customer, totals);
+    }
+
+    function showSuccessModal(customer, totals) {
+      const modal = document.getElementById('order-success-modal');
+      const randomCode = 'DEMO-IR-' + Math.floor(10000 + Math.random() * 90000);
+      
+      currentLastOrder = {
+        code: randomCode,
+        customer,
+        totals
+      };
+
+      document.getElementById('res-tracking-code').textContent = randomCode;
+      document.getElementById('res-name').textContent = customer.name;
+      document.getElementById('res-phone').textContent = customer.phone;
+      document.getElementById('res-amount').textContent = `${formatPrice(totals.total)} تومان`;
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    window.onCartUpdated = () => {
+      renderCheckoutPage();
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCheckoutPage();
+    });
+  </script>
+</body>
+</html>
